@@ -29,7 +29,7 @@ if (isset($_SESSION['staff_login']) == false) {
         
         $login_id = $_SESSION['login_id'];
 
-        $sql = 'SELECT * FROM ryusenkaku_info';
+        $sql = 'SELECT * FROM comment_keep';
     } catch (PDOException $e) {
         echo 'エラー発生: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES);
         exit;

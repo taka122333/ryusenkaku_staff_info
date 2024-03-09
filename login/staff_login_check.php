@@ -8,13 +8,25 @@
 <body>
     <?php
     try {
-        require_once('../common/security.php');
+        require_once __DIR__ . '/../common/db_config.php';
+        require_once __DIR__ . '/../common/security.php';
 
         $post = sanitize($_POST);
         $login_id = $post['login_id'];
-        $login_pass = md5($post['login_pass']);
+        $login_pass = $post['login_pass'];
+        $login_pass = md5($login_pass);
+        echo $login_pass;
 
-        if ($login_pass != md5('pass')) {
+        $sql = 'SELECT * FROM login_account WHERE login_id = ?';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(1, $login_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $dbh = null;
+
+        echo $login_pass;
+
+        if ($login_pass != $result['login_pass']) {
             echo 'パスワードが間違っています。<br>';
             echo '<br>';
             echo '<a href="../staff_login.html">ログイン画面へ</a>';
