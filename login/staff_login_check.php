@@ -15,6 +15,7 @@
         $login_id = $post['login_id'];
         $login_pass = $post['login_pass'];
         $login_pass = md5($login_pass);
+        echo $login_pass;
 
         $sql = 'SELECT * FROM login_account WHERE login_id = ?';
         $stmt = $dbh->prepare($sql);
@@ -23,6 +24,7 @@
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $dbh = null;
 
+        echo $login_pass;
 
         if ($login_pass != $result['login_pass']) {
             echo 'パスワードが間違っています。<br>';
