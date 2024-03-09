@@ -35,5 +35,44 @@ if (isset($_SESSION['staff_login']) == false) {
         exit;
     }
     ?>
+    <!-- ここから追加（2024/03/09） -->
+    <?php
+    try {      
+        $user = 'suzuki';
+        $pass = 'suzukitest';
+        $dsn = 'mysql:host=localhost;dbname=ryusenkaku;charset=utf8';
+        $dbh = new PDO($dsn, $user, $pass);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = 'SELECT * FROM comment_keep';
+        $stmt = $dbh->query($sql);
+        $result = $dbh->fetchALL(PDO::FETCH_ASSOC);
+        $dbh = null;
+    } catch (PDOException $e) {
+        echo 'エラー発生' . htmlspecialchars($e->getMessage(), ENT_QUOTES);
+    }
+    ?>
+    <h1>投稿一覧</h1>
+    <table border=1>
+        <tr>
+            <th>投稿日</th>
+            <th>タイトル</th>
+            <th>内容</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <?php
+        foreach ($result as $row) {
+            echo '<tr>';
+            echo '<td>' . $result['date'] . '</td>';
+            echo '<td>' . $result['title'] . '</td>';
+            echo '<td>' . $result['body'] . '</td>';
+            echo '<td><a href="detail.php?id=' . $result['id'] . '">詳細</a></td>';
+            echo '<td><a href="edit.php?id=' . $result['id'] . '">変更</a></td>';
+            echo '<td><a href="delete.php?id=' . $result['id'] . '">削除</a></td>';
+            echo '</tr>';
+        }       
+        ?>
+    </table>
 </body>
 </html>
