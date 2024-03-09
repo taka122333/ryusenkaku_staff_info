@@ -30,28 +30,18 @@ if (isset($_SESSION['staff_login']) == false) {
         $login_id = $_SESSION['login_id'];
 
         $sql = 'SELECT * FROM comment_keep';
+        $stmt = $dbh->query($sql);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $dbh = null;
     } catch (PDOException $e) {
         echo 'エラー発生: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES);
         exit;
     }
     ?>
-    <!-- ここから追加（2024/03/09） -->
-    <?php
-    try {      
-        $user = 'suzuki';
-        $pass = 'suzukitest';
-        $dsn = 'mysql:host=localhost;dbname=ryusenkaku;charset=utf8';
-        $dbh = new PDO($dsn, $user, $pass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = 'SELECT * FROM comment_keep';
-        $stmt = $dbh->query($sql);
-        $result = $dbh->fetchALL(PDO::FETCH_ASSOC);
-        $dbh = null;
-    } catch (PDOException $e) {
-        echo 'エラー発生' . htmlspecialchars($e->getMessage(), ENT_QUOTES);
-    }
-    ?>
+    
     <h1>投稿一覧</h1>
+    <a href="add.php">新規投稿</a>
+    <br>
     <table border=1>
         <tr>
             <th>投稿日</th>
@@ -64,12 +54,12 @@ if (isset($_SESSION['staff_login']) == false) {
         <?php
         foreach ($result as $row) {
             echo '<tr>';
-            echo '<td>' . $result['date'] . '</td>';
-            echo '<td>' . $result['title'] . '</td>';
-            echo '<td>' . $result['body'] . '</td>';
-            echo '<td><a href="detail.php?id=' . $result['id'] . '">詳細</a></td>';
-            echo '<td><a href="edit.php?id=' . $result['id'] . '">変更</a></td>';
-            echo '<td><a href="delete.php?id=' . $result['id'] . '">削除</a></td>';
+            echo '<td>' . $row['date'] . '</td>';
+            echo '<td>' . $row['title'] . '</td>';
+            echo '<td>' . $row['body'] . '</td>';
+            echo '<td><a href="detail.php?id=' . $row['id'] . '">詳細</a></td>';
+            echo '<td><a href="edit.php?id=' . $row['id'] . '">変更</a></td>';
+            echo '<td><a href="delete.php?id=' . $row['id'] . '">削除</a></td>';
             echo '</tr>';
         }       
         ?>
