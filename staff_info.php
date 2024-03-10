@@ -40,7 +40,7 @@ if (isset($_SESSION['staff_login']) == false) {
     ?>
     
     <h1>投稿一覧</h1>
-    <a href="add.php">新規投稿</a>
+    <a href="./crud/add/add.php">新規投稿</a>
     <br>
     <table border=1>
         <tr>
