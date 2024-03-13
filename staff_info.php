@@ -26,6 +26,7 @@ if (isset($_SESSION['staff_login']) == false) {
     try {
         require_once('./common/security.php');
         require_once('./common/db_config.php');
+        require_once('./common/wraptext.php');
         
         $login_id = $_SESSION['login_id'];
 
@@ -55,13 +56,13 @@ if (isset($_SESSION['staff_login']) == false) {
         foreach ($result as $row) {
             echo '<tr>';
             echo '<td>' . $row['date'] . '</td>';
-            echo '<td>' . $row['title'] . '</td>';
-            echo '<td>' . $row['body'] . '</td>';
+            echo '<td>' . nl2br(wrapText($row['title'], 15)) . '</td>';
+            echo '<td>' . mb_substr($row['body'], 0, 20) . '</td>';
             echo '<td><a href="./crud/detail/detail.php?id=' . $row['id'] . '">詳細</a></td>';
             echo '<td><a href="./crud/edit/edit.php?id=' . $row['id'] . '">変更</a></td>';
             echo '<td><a href="./crud/delete/delete.php?id=' . $row['id'] . '">削除</a></td>';
             echo '</tr>';
-        }       
+        } 
         ?>
     </table>
 </body>
