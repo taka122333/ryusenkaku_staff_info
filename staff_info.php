@@ -39,7 +39,7 @@ if (isset($_SESSION['staff_login']) == false) {
     }
     ?>
     
-    <h1>投稿一覧</h1>
+    <h1>お知らせ一覧</h1>
     <a href="./crud/add/add.php">新規投稿</a>
     <br>
     <table border=1>
@@ -57,9 +57,9 @@ if (isset($_SESSION['staff_login']) == false) {
             echo '<td>' . $row['date'] . '</td>';
             echo '<td>' . $row['title'] . '</td>';
             echo '<td>' . $row['body'] . '</td>';
-            echo '<td><a href="detail.php?id=' . $row['id'] . '">詳細</a></td>';
-            echo '<td><a href="edit.php?id=' . $row['id'] . '">変更</a></td>';
-            echo '<td><a href="delete.php?id=' . $row['id'] . '">削除</a></td>';
+            echo '<td><a href="./crud/detail/detail.php?id=' . $row['id'] . '">詳細</a></td>';
+            echo '<td><a href="./crud/edit/edit.php?id=' . $row['id'] . '">変更</a></td>';
+            echo '<td><a href="./crud/delete/delete.php?id=' . $row['id'] . '">削除</a></td>';
             echo '</tr>';
         }       
         ?>
