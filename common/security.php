@@ -6,4 +6,3 @@ function sanitize($before) {
     }
     return $after;
 }
-?>

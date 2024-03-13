@@ -10,7 +10,7 @@ if (isset($_SESSION['staff_login']) == false) {
     $login_id = $_SESSION['login_id'];
     echo '従業員ID: ' . $login_id . ' 操作中';
     echo '----------------';
-    echo '<a href="./logout/staff_logout.php">ログアウト</a>';
+    echo '<a href="../../logout/staff_logout.php">ログアウト</a>';
 }
 ?>
 <!DOCTYPE html>
