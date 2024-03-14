@@ -32,11 +32,12 @@ if (isset($_SESSION['staff_login']) == false) {
         $title = $_POST['title'];
         $body = $_POST['body'];
 
-        $sql = 'INSERT INTO comment_keep (date,title,body) VALUES (?,?,?)';
+        $sql = 'INSERT INTO comment_keep (date,title,body,login_id) VALUES (?,?,?,?)';
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(1, $date, PDO::PARAM_STR);
         $stmt->bindValue(2, $title, PDO::PARAM_STR);
         $stmt->bindValue(3, $body, PDO::PARAM_STR);
+        $stmt->bindValue(4, $login_id, PDO::PARAM_INT);
         $stmt->execute();
         $dbh = null;
 

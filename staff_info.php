@@ -42,6 +42,7 @@ if (isset($_SESSION['staff_login']) == false) {
     
     <h1>お知らせ一覧</h1>
     <a href="./crud/add/add.php">新規投稿</a>
+    <a href="./history/staff_history.php">編集履歴</a>
     <br>
     <table border=1>
         <tr>
