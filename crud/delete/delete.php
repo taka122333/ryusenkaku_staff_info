@@ -19,7 +19,7 @@ if (isset($_SESSION['staff_login']) == false) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>投稿削除</title>
+    <title>お知らせ削除</title>
 </head>
 <body>
     <h1>以下の内容を削除しますか？</h1>
@@ -38,7 +38,7 @@ if (isset($_SESSION['staff_login']) == false) {
         $dbh = null;
 
         echo '<h2>投稿日</h2>';
-        echo $result['date'] . '<br>';
+        echo date('Y/m/d', strtotime($result['date'])) . '<br>';
         echo '<br>';
         echo '<h2>タイトル</h2>';
         echo $result['title'] . '<br>';
@@ -51,7 +51,7 @@ if (isset($_SESSION['staff_login']) == false) {
     }
     ?>
     <br>
-    <form method="post" action="delete_check.php?id=<?= $result['id']; ?>">
+    <form method="post" action="delete_check.php?id=<?= $result['id'] ?>">
         <input type="submit" value="はい">
         <input type="button" onclick="history.back()" value="いいえ">
     </form>

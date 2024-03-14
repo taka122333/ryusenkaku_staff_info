@@ -19,24 +19,26 @@ if (isset($_SESSION['staff_login']) == false) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お知らせ追加完了</title>
+    <title>お知らせ変更完了</title>
 </head>
 <body>
-    <h1>以下の内容で投稿が完了しました。</h1>
+    <h1>変更が完了しました。</h1>
     <?php
     try {
         require_once('../../common/security.php');
         require_once('../../common/db_config.php');
         
+        $id = (int)$_GET['id'];
         $date = date('Y/m/d', strtotime($_POST['date']));
         $title = $_POST['title'];
         $body = $_POST['body'];
 
-        $sql = 'INSERT INTO comment_keep (date,title,body) VALUES (?,?,?)';
+        $sql = 'UPDATE comment_keep SET date = ?, title = ?, body = ? WHERE id = ?';
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(1, $date, PDO::PARAM_STR);
         $stmt->bindValue(2, $title, PDO::PARAM_STR);
         $stmt->bindValue(3, $body, PDO::PARAM_STR);
+        $stmt->bindValue(4, $id, PDO::PARAM_INT);
         $stmt->execute();
         $dbh = null;
 
@@ -55,5 +57,6 @@ if (isset($_SESSION['staff_login']) == false) {
     ?>
     <br>
     <a href="../../staff_info.php">お知らせ一覧に戻る</a>
+    
 </body>
 </html>

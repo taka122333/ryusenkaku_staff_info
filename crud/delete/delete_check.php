@@ -19,7 +19,7 @@ if (isset($_SESSION['staff_login']) == false) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>削除確認</title>
+    <title>お知らせ削除確認</title>
 </head>
 <body>
     <h1>本当に削除しますか？</h1>
@@ -43,7 +43,7 @@ if (isset($_SESSION['staff_login']) == false) {
     }
     ?>
     <br>
-    <form method="post" action="delete_done.php?id=<?= $result['id']; ?>">
+    <form method="post" action="delete_done.php?id=<?= $result['id'] ?>">
         <input type="submit" value="削除する">
         <input type="button" onclick="history.back()" value="戻る">
     </form>

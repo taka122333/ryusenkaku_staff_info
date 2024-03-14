@@ -19,41 +19,43 @@ if (isset($_SESSION['staff_login']) == false) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お知らせ追加完了</title>
+    <title>お知らせ変更</title>
 </head>
 <body>
-    <h1>以下の内容で投稿が完了しました。</h1>
+    <h1>お知らせ変更</h1>
     <?php
     try {
         require_once('../../common/security.php');
         require_once('../../common/db_config.php');
         
-        $date = date('Y/m/d', strtotime($_POST['date']));
-        $title = $_POST['title'];
-        $body = $_POST['body'];
+        $id = $_GET['id'];
 
-        $sql = 'INSERT INTO comment_keep (date,title,body) VALUES (?,?,?)';
+        $sql = 'SELECT * FROM comment_keep WHERE id = ?';
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(1, $date, PDO::PARAM_STR);
-        $stmt->bindValue(2, $title, PDO::PARAM_STR);
-        $stmt->bindValue(3, $body, PDO::PARAM_STR);
+        $stmt->bindValue(1, $id, PDO::PARAM_INT);
         $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $dbh = null;
-
-        echo '<h2>投稿日</h2>';
-        echo $date . '<br>';
-        echo '<br>';
-        echo '<h2>タイトル</h2>';
-        echo $title . '<br>';
-        echo '<h2>本文</h2>';
-        echo nl2br($body) . '<br>';
 
     } catch (PDOException $e) {
         echo 'エラー発生: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES);
         exit;
     }
     ?>
-    <br>
-    <a href="../../staff_info.php">お知らせ一覧に戻る</a>
+
+    <form method="post" action="edit_check.php?id=<?= $result['id'] ?>">
+        <h2>投稿日</h2>
+        <input type="date" name="date" value="<?= $result['date'] ?>"><br>
+        
+        <h2>タイトル</h2>
+        <input type="text" name="title" value="<?= $result['title'] ?>"><br>
+        
+        <h2>本文</h2>
+        <textarea name="body" id="" cols="100" rows="20"><?= $result['body'] ?></textarea><br>
+        <br>
+        <input type="button" onclick="history.back()" value="戻る">
+        <input type="submit" value="変更する">
+    </form>
+    
 </body>
 </html>

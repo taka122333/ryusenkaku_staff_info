@@ -19,7 +19,7 @@ if (isset($_SESSION['staff_login']) == false) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>投稿詳細</title>
+    <title>お知らせ詳細</title>
 </head>
 <body>
     <h1>お知らせ詳細</h1>
@@ -38,7 +38,7 @@ if (isset($_SESSION['staff_login']) == false) {
         $dbh = null;
 
         echo '<h2>投稿日</h2>';
-        echo $result['date'] . '<br>';
+        echo date('Y/m/d', strtotime($result['date'])) . '<br>';
         echo '<br>';
         echo '<h2>タイトル</h2>';
         echo $result['title'] . '<br>';
@@ -51,6 +51,9 @@ if (isset($_SESSION['staff_login']) == false) {
     }
     ?>
     <br>
-    <a href="../../staff_info.php">お知らせ一覧に戻る</a>
+    <form method="post" action="../edit/edit.php?id=<?= $result['id'] ?>">
+        <input type="button" onclick="history.back()" value="戻る">
+        <input type="submit" value="変更する">
+    </form>
 </body>
 </html>
