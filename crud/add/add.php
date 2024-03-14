@@ -19,10 +19,10 @@ if (isset($_SESSION['staff_login']) == false) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新規投稿</title>
+    <title>お知らせ追加</title>
 </head>
 <body>
-    <h1>新規投稿</h1>
+    <h1>お知らせ追加</h1>
 
     <form method="post" action="add_check.php">
         <h2>投稿日</h2>

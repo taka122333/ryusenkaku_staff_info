@@ -19,10 +19,10 @@ if (isset($_SESSION['staff_login']) == false) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>投稿内容確認</title>
+    <title>お知らせ追加確認</title>
 </head>
 <body>
-    <h1>投稿内容確認</h1>
+    <h1>以下の内容を追加しますか？</h1>
     <?php
     try {
         $date = date('Y/m/d', strtotime($_POST['date']));
@@ -43,7 +43,6 @@ if (isset($_SESSION['staff_login']) == false) {
     }
     ?>
     <br>
-    以上の内容で投稿しますか？
     <form method="post" action="add_done.php">
         <input type="hidden" name="date" value="<?= $date ?>">
         <input type="hidden" name="title" value="<?= $title ?>">
