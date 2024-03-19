@@ -9,6 +9,6 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //サーバー用
 // $user = 'xs144235_wp1';
-// $pass = 'jq6p7ce4sy';
+// $pass = 'ここにパスワードを入れる';
 // $dbh = new PDO('mysql:host=localhost;dbname=xs144235_wp1;charset=utf8', $user, $pass);
 // $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
